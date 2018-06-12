@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CryptoTaxCalculator.Models;
 using CryptoTaxCalculator.Services;
+using System.IO;
 
 namespace CryptoTaxCalculator.Controllers
 {
@@ -26,26 +27,11 @@ namespace CryptoTaxCalculator.Controllers
         {
             var scan = await _coinScanner.ScanCoinData();
             var converted = _coinScanner.JsonToCoinModel(scan);
-            foreach (CoinModel c in converted)
-                Create(c);
+
+            foreach (var c in converted)
+                _context.Add(c);
+            await _context.SaveChangesAsync();
 
         }      
-
-        // POST: CoinModels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TimeStamp,Cap24hrChange,Name,MarketCap,Percent,Price,Shapeshift,Symbol,Supply,UsdVolume,Volume,VwapData,VwapDataBtc")] CoinModel coinModel)
-        {
-            if (ModelState.IsValid)
-            {
-                coinModel.TimeStamp = DateTime.Now;
-                _context.Add(coinModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(coinModel);
-        }
     }
 }

@@ -35,7 +35,6 @@ namespace CryptoTaxCalculator.Services
         {
             if (res == string.Empty)
                 return new CoinCollectionModel();
-            System.Diagnostics.Debug.WriteLine(res);
             return JsonConvert.DeserializeObject<CoinCollectionModel>(res);
         }
     }
