@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Timers;
 using System.Threading.Tasks;
 using CryptoTaxCalculator.Services;
 using Microsoft.AspNetCore;
@@ -16,6 +17,15 @@ namespace CryptoTaxCalculator
     {
         public static void Main(string[] args)
         {
+            var cts = new CryptoTickerScanner();
+            var _timer = new Timer(1000);
+            Task.Run(() => { _timer.Elapsed += async (o, eargs) =>
+                 {
+                     var res = await cts.ScanAsync();
+                     cts.WriteData(res);
+                 };
+            });
+
             BuildWebHost(args).Run();
         }
 

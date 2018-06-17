@@ -5,13 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CryptoTaxCalculator.Models
+namespace CryptoScanner.Model
 {
     public class CoinModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
-
         public DateTime TimeStamp { get; set; }
         public decimal Cap24hrChange { get; set; }
         public string Long { get; set; }

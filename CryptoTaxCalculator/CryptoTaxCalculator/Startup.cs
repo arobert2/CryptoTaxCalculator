@@ -30,13 +30,6 @@ namespace CryptoTaxCalculator
 
             services.AddDbContext<CryptoTaxCalculatorContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CryptoTaxCalculatorContext")));
-
-            services.AddTransient<CoinScanService>();
-
-            HttpClient hc = new HttpClient();
-            Timer t = new Timer();
-            t.Interval = 1000;
-            t.Elapsed += (o, args) => hc.GetAsync("/CoinModels");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
