@@ -8,33 +8,35 @@ namespace CryptoScanner.DbSystem
 {
     public class CoinDbController : IDbController<DbCoinModel>
     {
-        public string ConnectionString { get; private set; }
+        private OdbcConnection _connection { get; set; }
 
         public CoinDbController(string connectionString)
         {
-            ConnectionString = connectionString;
+            _connection = new OdbcConnection(connectionString);
+        }
+
+        ~CoinDbController()
+        {
+            _connection.Dispose();
         }
 
         public void Create(DbCoinModel model)
         {
-            using (OdbcConnection connection = new OdbcConnection(ConnectionString))
-            {
-                connection.Open();
-                using (OdbcCommand command = new OdbcCommand("INSERT INTO " + model.Symbol + " VALUES ( " + model.TimeStamp + ", " + model.Name + ", " + model.Symbol + ", " + model.Price + " )", connection))
+                _connection.Open();
+                using (OdbcCommand command = new OdbcCommand("INSERT INTO " + model.Symbol + " VALUES ( " + model.TimeStamp + ", " + model.Name + ", " + model.Symbol + ", " + model.Price + " )", _connection))
                     command.ExecuteNonQuery();
-                connection.Close();
-            }
+                _connection.Close();
+            
         }
 
         public void Delete(string table, int id)
         {
-            using (OdbcConnection connection = new OdbcConnection(ConnectionString))
-            {
-                connection.Open();
+
+                _connection.Open();
                 using (OdbcCommand command = new OdbcCommand("DELETE FROM " + table + " WHERE ID=" + id))
                     command.ExecuteNonQuery();
-                connection.Close();
-            }
+                _connection.Close();
+            
         }
 
 
@@ -50,23 +52,23 @@ namespace CryptoScanner.DbSystem
 
         public void CreateTable(string tablename)
         {
-            using (OdbcConnection connection = new OdbcConnection(ConnectionString))
-            {
-                connection.Open();
-                using (OdbcCommand command = new OdbcCommand("CREATE TABLE " + tablename + " ( ID int NOT NULL AUTO_INCREMENT, TimeStamp datetime NOT NULL, Name string, Symbol string NOT NULL, Price money, PRIMARY KEY(ID) )", connection))
+
+                _connection.Open();
+                using (OdbcCommand command = new OdbcCommand("CREATE TABLE " + tablename + " ( ID int NOT NULL AUTO_INCREMENT, TimeStamp datetime NOT NULL, Name string, Symbol string NOT NULL, Price money, PRIMARY KEY(ID) )", _connection))
                     command.ExecuteNonQuery();
-                connection.Close();
-            }
+                _connection.Close();
+            
         }
 
         public bool CheckIfTableExists(string tablename)
         {
-            using (OdbcConnection connection = new OdbcConnection(ConnectionString))
-            {
-                connection.Open();
-                using (OdbcCommand command = new OdbcCommand("SELECT CASE WHEN EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=" + tablename + " THEN TRUE ELSE FALSE END", connection))
-                    return Convert.ToBoolean(command.ExecuteScalar());
-            }
+                _connection.Open();
+            bool result;
+            using (OdbcCommand command = new OdbcCommand("SELECT CASE WHEN EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME=" + tablename + " THEN TRUE ELSE FALSE END", _connection))
+                result = Convert.ToBoolean(command.ExecuteScalar());
+            _connection.Close();
+            return result;
+            
         }
 
         public DbCoinModel Read(int id)

@@ -9,10 +9,11 @@ namespace CryptoScanner
     {
         static void Main(string[] args)
         {
-            Timer timer = new Timer(1000);
+            Timer timer = new Timer(5000);
             CoinScanService coinscanner = new CoinScanService();
-            CoinDbController dbController = new CoinDbController("(localdb)\\mssqllocaldb;Database=CoinHistories;Trusted_Connection=True;MultipleActiveResultSets=true");
-
+            //CoinDbController dbController = new CoinDbController("Driver={SQL Server};Server=(localdb)\\mssqllocaldb;Database=CoinHistories;");
+            CoinDbController dbController = new CoinDbController("Driver={SQL Server};Server=(localdb)\\MSSQLLocalDB;Trusted_Connection=Yes;Database=CoinHistories;");
+            
             BufferDbWriter bufferWriter = new BufferDbWriter();
 
             timer.Elapsed += async (o, args2) => {

@@ -7,8 +7,6 @@ namespace CryptoScanner.DbSystem
 {
     public interface IDbController<T>
     {
-        string ConnectionString { get; }
-
         void Create(T model);
         void Update(T updatedObject);
         T Read(int id);
