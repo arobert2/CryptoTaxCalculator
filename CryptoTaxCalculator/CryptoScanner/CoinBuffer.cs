@@ -13,8 +13,17 @@ namespace CryptoScanner
         {
             foreach(var c in coinCollection)
             {
+                int value=-99999;
+                int.TryParse(c.Short, out value);
+                if (value != -99999)
+                    continue;
+
+                if (c.Short == "DROP")
+                    c.Short = "DROP2";
+
                 if (!CoinStackBuffer.ContainsKey(c.Short))
                     CoinStackBuffer.Add(c.Short, new Stack<DbCoinModel>());
+
                 var dbCoin = new DbCoinModel()
                 {
                     TimeStamp = c.TimeStamp,

@@ -19,7 +19,7 @@ namespace CryptoScanner.DbSystem
                 var vals = CoinBuffer.CoinStackBuffer.Keys.ToArray();
                 foreach (var csb in vals)
                 {
-                    if (coincontroller.CheckIfTableExists(csb))
+                    if (!coincontroller.CheckIfTableExists(csb))
                         coincontroller.CreateTable(csb);
 
                     if (CoinBuffer.CoinStackBuffer[csb].Count > 0)
