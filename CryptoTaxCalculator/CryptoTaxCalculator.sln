@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoScanner", "CryptoScanner\CryptoScanner.csproj", "{3DCB8852-548A-45FA-A6E4-6849476E677F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoTaxCalculator", "CryptoTaxCalculator\CryptoTaxCalculator.csproj", "{00628B04-E5DF-498F-9786-608B1E19D9CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3DCB8852-548A-45FA-A6E4-6849476E677F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DCB8852-548A-45FA-A6E4-6849476E677F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DCB8852-548A-45FA-A6E4-6849476E677F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DCB8852-548A-45FA-A6E4-6849476E677F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00628B04-E5DF-498F-9786-608B1E19D9CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00628B04-E5DF-498F-9786-608B1E19D9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00628B04-E5DF-498F-9786-608B1E19D9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00628B04-E5DF-498F-9786-608B1E19D9CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6161CC33-19E4-4DDA-BFD1-9D20D7AB2359}
+		SolutionGuid = {EA1D9BC0-FD92-4FE5-822F-0D004D3B5B5C}
 	EndGlobalSection
 EndGlobal
