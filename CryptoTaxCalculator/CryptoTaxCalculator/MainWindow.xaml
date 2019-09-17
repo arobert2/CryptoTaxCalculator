@@ -15,17 +15,33 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" MouseUp="MenuItem_New"></MenuItem>
-                <MenuItem Header="_Open"></MenuItem>
-                <MenuItem Header="_Close"></MenuItem>
+                <MenuItem Header="_New" Click="MenuItem_New"></MenuItem>
+                <MenuItem Header="_Open" Click="MenuItem_Open"></MenuItem>
+                <MenuItem Header="_Close" Click="MenuItem_Close"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="_Generate Report"></MenuItem>
+                <MenuItem Header="_Generate Report" Click="MenuItem_GenerateReport"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="_Exit"></MenuItem>
+                <MenuItem Header="_Exit" Click="MenuItem_Exit"></MenuItem>
             </MenuItem>
         </Menu>
-        <TabControl Name="OrderTabControl" Grid.Row="1">
-            
-        </TabControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TabControl Name="OrderTabControl" Grid.Column="0">
+
+            </TabControl>
+            <ListBox Name="TableList" Grid.Column="1">
+
+            </ListBox>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBox Margin="30,0,0,0" Name="CurrencySell" Width="50"></TextBox>
+            <TextBox Name="CurrencyBuy" Width="50"></TextBox>
+            <TextBox Name="AmountInput" Width="300"></TextBox>
+            <TextBox Name="ValueInput" Width="200"></TextBox>
+            <Button Name="SubmitOrderButton" Width="100">Add Order</Button>
+        </StackPanel>
     </Grid>
 </Window>
